@@ -1,4 +1,4 @@
-import Image from "next/image";
+// Fallback Image component used when 'next/image' or its types are unavailable.
 import { useMemo, useState } from "react";
 import Pill from "@/components/common/Pill";
 import {
@@ -7,6 +7,14 @@ import {
   PROPERTYLISTINGSAMPLE,
 } from "@/constants";
 import type { PropertyProps } from "@/interfaces";
+
+const Image = (props: any) => {
+  const { src, alt, fill, className, style, ...rest } = props;
+  const imgStyle = fill
+    ? { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", ...style }
+    : style;
+  return <img src={String(src)} alt={alt} className={className} style={imgStyle as React.CSSProperties} {...rest} />;
+};
 
 const filterMatchers: Record<
   string,
